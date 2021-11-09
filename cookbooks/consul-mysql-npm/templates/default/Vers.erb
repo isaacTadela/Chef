@@ -1,0 +1,9 @@
+#!/bin/bash 
+ if aws s3api get-object --bucket unofficial-chevrolet-auto-shop-bucket --key Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz ; then
+  tar -xvzf Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz
+  rm -f Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz 
+  # sudo mysql --host=$DB_DNS --port=$DB_PORT --user=$DB_USER --password=$DB_PASS < Unofficial-Chevrolet-Auto-shop/schema.sql
+  echo "Downloaded file:  Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz"
+ else 
+  echo "Failed to Download file:  Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz"
+ fi 
