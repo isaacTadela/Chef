@@ -4,7 +4,7 @@
     "consul-mysql-npm": {
       "version": "Vers.erb",
       "attr1": {
-        "name": "{{ key '/version' }}"
+        "name": "{{ key "/version" }}"
       }
     }
   },
