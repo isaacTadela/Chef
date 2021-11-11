@@ -1,15 +1,12 @@
 vault {
  # This is the address of the Vault leader.
- address      = "http://{{env \"MASTER_IP\"}}:8200"
-}
-
+ address      = "http://$MASTER_IP:8200"
  # This value can also be specified via the environment variable VAULT_TOKEN.
  token        = "root"
- 
  unwrap_token = false 
  renew_token  = false
  }
-  
+
  consul {
   address = "$MASTER_IP:8500"
  
