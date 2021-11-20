@@ -21,9 +21,9 @@ vault {
  
  # render the role with the new value and re run chef-solo 
  template {
-  source = "/home/ubuntu/Chef/script/consul-mysql-npm-role.tpl"
-  destination = "/home/ubuntu/Chef/roles/consul-mysql-npm.json"
+  source = "/home/Chef/script/consul-mysql-npm-role.tpl"
+  destination = "/home/Chef/roles/consul-mysql-npm.json"
    exec {
-     command = "sudo chef-solo -c /home/ubuntu/Chef/solo.rb -j /home/ubuntu/Chef/runlist.json > /home/ubuntu/consul-template.log "
+     command = "sudo chef-solo -c /home/Chef/solo.rb -j /home/Chef/runlist.json > /home/consul-template.log"
    }
  }
