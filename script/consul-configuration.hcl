@@ -19,7 +19,7 @@ vault {
   
  log_level = "warn"
  
- # render the role with the new value and re run chef-solo 
+ # render the role with the new version value, temporary aws credentials and re run chef-solo
  template {
   source = "/home/Chef/script/consul-mysql-npm-role.tpl"
   destination = "/home/Chef/roles/consul-mysql-npm.json"
