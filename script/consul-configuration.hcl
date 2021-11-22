@@ -1,14 +1,15 @@
 vault {
- # This is the address of the Vault leader.
- address      = "http://$MASTER_IP:8200"
- # This value can also be specified via the environment variable VAULT_TOKEN.
- token        = "root"
+ # Specified via the environment variable VAULT_ADDR, This is the address of the Vault leader.
+ # address      = "http://$MASTER_IP:8200"
+ # Specified via the environment variable VAULT_TOKEN, This is the token of the Vault leader.
+ # token        = "root"
  unwrap_token = false 
  renew_token  = false
  }
 
  consul {
-  address = "$MASTER_IP:8500"
+  # Specified via the environment variable CONSUL_HTTP_ADDR, This is the address of the Consul server.
+  # address = "$MASTER_IP:8500"
  
   auth {
     enabled = true
