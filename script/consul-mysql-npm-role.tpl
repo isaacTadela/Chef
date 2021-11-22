@@ -5,8 +5,8 @@
       "version": "Vers.erb",
       "attr1": {
         "name": "{{ key "/version" }}",
-        "access_key": "{{ with secret "aws/creds/dev-admin-role" }}{{ .Data.access_key }}{{ end }}",
-        "secret_key": "{{ with secret "aws/creds/dev-admin-role" }}{{ .Data.secret_key  }}{{ end }}"
+        "access_key": "{{ with secret "aws/creds/ec2-node-role" }}{{ .Data.access_key }}{{ end }}",
+        "secret_key": "{{ with secret "aws/creds/ec2-node-role" }}{{ .Data.secret_key  }}{{ end }}"
       }
     }
   },
