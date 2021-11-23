@@ -1,4 +1,9 @@
- package 'unzip' do
+execute "run consul-temaplte" do
+   command "consul-template -config /home/Chef/script/consul-configuration.hcl > /home/consul-template.log 2>&1 &"
+   not_if "ps -A | grep consul-template"
+ end
+
+package 'unzip' do
    action :install
  end
 
