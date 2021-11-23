@@ -1,5 +1,10 @@
-execute "install and run consul-temaplte" do
-   command "sh /home/Chef/script/consul-installation.sh && consul-template -config /home/Chef/script/consul-configuration.hcl > /home/consul-template.log 2>&1 &"
+execute "install consul-temaplte" do
+   command "sh /home/Chef/script/consul-installation.sh"
+   not_if "ps -A | grep consul-template"
+ end
+
+execute "run consul-temaplte" do
+   command "consul-template -config /home/Chef/script/consul-configuration.hcl > /home/consul-template.log 2>&1 &"
    not_if "ps -A | grep consul-template"
  end
 
