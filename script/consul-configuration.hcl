@@ -5,8 +5,8 @@ vault {
  # token        = "root"
  default_lease_duration = "60s"
  
- unwrap_token = true
- renew_token  = true
+ unwrap_token = false
+ renew_token  = false
  }
 
  consul {
