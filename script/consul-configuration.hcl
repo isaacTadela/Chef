@@ -3,8 +3,10 @@ vault {
  # address      = "http://$MASTER_IP:8200"
  # Specified via the environment variable VAULT_TOKEN, This is the token of the Vault leader.
  # token        = "root"
- unwrap_token = false 
- renew_token  = false
+ default_lease_duration = "60s"
+ 
+ unwrap_token = true
+ renew_token  = true
  }
 
  consul {
