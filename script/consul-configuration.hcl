@@ -6,8 +6,13 @@ vault {
  default_lease_duration = "60s"
  
  unwrap_token = false
- renew_token  = false
+ renew_token  = true
  }
+
+syslog {
+  enabled  = true
+  facility = "LOCAL5"
+}
 
  consul {
   # Specified via the environment variable CONSUL_HTTP_ADDR, This is the address of the Consul server.
