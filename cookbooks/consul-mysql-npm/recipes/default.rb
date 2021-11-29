@@ -10,6 +10,12 @@ package 'unzip' do
    action :install
  end
  
+# Node.js binary distributions are available from NodeSource
+# for Debian and Ubuntu based Linux distributions
+ execute "Node.js binary" do
+   command "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
+ end
+
  package 'nodejs' do
    action :install
  end
