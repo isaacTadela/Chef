@@ -33,17 +33,11 @@ execute "run consul-temaplte" do
    mode '0644'
  end
  
- bash 'run myApp-installation.sh' do
+bash 'run myApp-installation.sh, npm install and start' do
    cwd '/home/'
-   code <<-EOH 
-     sh /home/Chef/script/myApp-installation.sh > /home/myApp.log 
+   code <<-EOH
+     sh /home/Chef/script/myApp-installation.sh > /home/myApp.log
+     cd /home/Unofficial-Chevrolet-Auto-shop && npm install >> /home/myApp.log
+     cd /home/Unofficial-Chevrolet-Auto-shop && node server.js & >> /home/myApp.log
    EOH
  end
-
-bash 'npm install & run' do
-  cwd ::File.dirname('/home/Unofficial-Chevrolet-Auto-shop/')
-  code <<-EOH
-    npm install
-    node server.js &
-  EOH
-end 
