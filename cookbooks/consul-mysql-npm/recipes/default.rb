@@ -17,14 +17,6 @@ package 'unzip' do
    command "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs"
  end
 
- package 'nodejs' do
-   action :install
- end
- 
- package 'npm' do
-   action :install
- end
- 
 execute "install consul-temaplte" do
    command "sh /home/Chef/script/consul-installation.sh"
    not_if "ps -A | grep consul-template"
