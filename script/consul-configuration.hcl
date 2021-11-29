@@ -6,7 +6,7 @@ vault {
  default_lease_duration = "60s"
  
  unwrap_token = false
- renew_token  = true
+ renew_token  = false
  }
 
 syslog {
