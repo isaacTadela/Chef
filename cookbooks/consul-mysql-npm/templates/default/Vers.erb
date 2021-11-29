@@ -4,8 +4,10 @@
   rm -f Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz 
   sudo mysql --host=$DB_DNS --port=$DB_PORT --user=$DB_USER --password=$DB_PASS < Unofficial-Chevrolet-Auto-shop/schema.sql
   echo "Downloaded file:  Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz"
-  sudo npm install --prefix /home/Unofficial-Chevrolet-Auto-shop &>/dev/null
-  sudo nohup npm start --prefix /home/Unofficial-Chevrolet-Auto-shop &
+  sudo npm install --prefix /home/Unofficial-Chevrolet-Auto-shop/ &>/dev/null
+  cd /home/Unofficial-Chevrolet-Auto-shop/
+  node server.js &
+  # sudo nohup npm start --prefix /home/Unofficial-Chevrolet-Auto-shop &
   echo "npm installed and started"
  else 
   echo "Failed to Download file:  Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz"
