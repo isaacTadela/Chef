@@ -1,6 +1,7 @@
 #!/bin/bash 
  if AWS_ACCESS_KEY_ID=<%=node["consul-mysql-npm"]["attr1"]["access_key"] %> AWS_SECRET_ACCESS_KEY=<%=node["consul-mysql-npm"]["attr1"]["secret_key"] %> aws s3api get-object --bucket unofficial-chevrolet-auto-shop-bucket --key Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz ; then
-  tar -xvzf Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz > /dev/null
+  mkdir /home/Unofficial-Chevrolet-Auto-shop
+  tar -xvzf Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz -C /home/Unofficial-Chevrolet-Auto-shop > /dev/null
   rm -f Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz 
   sudo mysql --host=$DB_DNS --port=$DB_PORT --user=$DB_USER --password=$DB_PASS < Unofficial-Chevrolet-Auto-shop/schema.sql
   echo "Downloaded file:  Unofficial-Chevrolet-Auto-shop-<%=node["consul-mysql-npm"]["attr1"]["name"] %>.tar.gz"
