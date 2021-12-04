@@ -17,14 +17,26 @@ package 'unzip' do
    command "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs"
  end
 
-execute "install consul-temaplte" do
+# Install and run Consul agent
+execute "install consul" do
    command "sh /home/Chef/script/consul-installation.sh"
-   not_if "ps -A | grep consul-template"
+   not_if "ls /usr/local/bin/ | grep -x consul"
+ end
+
+execute "run consul agent" do
+   command "consul agent  -config-file /home/Chef/script/consul-configuration.hcl > /home/consul.log 2>&1 &"
+   not_if "ps -A | awk '{print $4}' | grep -x consul"
+ end
+
+# Install and run consul-template
+execute "install consul-temaplte" do
+   command "sh /home/Chef/script/consul-template-installation.sh"
+   not_if "ls /usr/local/bin/ | grep -x consul-template"
  end
 
 execute "run consul-temaplte" do
-   command "consul-template -config /home/Chef/script/consul-configuration.hcl > /home/consul-template.log 2>&1 &"
-   not_if "ps -A | grep consul-template"
+   command "consul-template -config /home/Chef/script/consul-template-configuration.hcl > /home/consul-template.log 2>&1 &"
+  not_if "ps -A | awk '{print $4}' | grep -x consul-template"
  end
 
 # Create/Update myApp-installation script
