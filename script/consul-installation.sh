@@ -22,4 +22,13 @@ LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
+EOF
 " > /etc/systemd/system/consul.service
+
+
+sudo mkdir /etc/consul.d
+sudo cp /home/Chef/script/web.json /etc/consul.d
+
+systemctl daemon-reload
+systemctl enable consul.service
+systemctl start consul.service

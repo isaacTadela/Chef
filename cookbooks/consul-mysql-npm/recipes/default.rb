@@ -20,11 +20,6 @@ package 'unzip' do
 # Install and run Consul agent
 execute "install consul" do
    command "sh /home/Chef/script/consul-installation.sh"
-   not_if "ls /usr/local/bin/ | grep -x consul"
- end
-
-execute "run consul agent" do
-   command "consul agent  -config-file /home/Chef/script/consul-configuration.hcl > /home/consul.log 2>&1 &"
    not_if "ps -A | awk '{print $4}' | grep -x consul"
  end
 
