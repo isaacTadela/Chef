@@ -22,7 +22,7 @@ LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
-EOF
+
 " > /etc/systemd/system/consul.service
 
 
