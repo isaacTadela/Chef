@@ -14,7 +14,7 @@ Documentation=https://www.consul.io/
 [Service]
 EnvironmentFile=-/etc/sysconfig/consul
 Restart=on-failure
-ExecStart=/usr/local/bin/consul agent -retry-join '$MASTER_IP' -data-dir=/var/lib/consul -config-dir=/etc/consul.d -bind=0.0.0.0 -datacenter=my_dc -client=0.0.0.0
+ExecStart=/usr/local/bin/consul agent -retry-join $MASTER_IP -data-dir=/var/lib/consul -config-dir=/etc/consul.d -bind=0.0.0.0 -datacenter=my_dc -client=0.0.0.0 -advertise $MASTER_IP
 ExecReload=/bin/kill -HUP $MAINPID
 LimitNOFILE=65536
 [Install]
