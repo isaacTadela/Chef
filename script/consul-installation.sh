@@ -31,4 +31,3 @@ sudo cp /home/Chef/script/web.json /etc/consul.d
 
 systemctl daemon-reload
 systemctl enable consul.service
-systemctl start consul.service
