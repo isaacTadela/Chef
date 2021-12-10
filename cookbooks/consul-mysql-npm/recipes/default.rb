@@ -23,12 +23,6 @@ execute "install consul" do
   not_if "ps -A | awk '{print $4}' | grep -x consul"
 end
 
-# Run Consul agent
-execute "run consul" do
-  command "systemctl daemon-reload; systemctl enable consul.service; systemctl start consul.service > /home/consul.log 2>&1 &"
-  not_if "ps -A | awk '{print $4}' | grep -x consul"
-end
-
 # Install consul-template
 execute "install consul-temaplte" do
   command "sh /home/Chef/script/consul-template-installation.sh"

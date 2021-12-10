@@ -20,7 +20,11 @@ LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/consul.service
 
-
+# The service to monitor
 sudo mkdir /etc/consul.d
 sudo cp /home/Chef/script/web.json /etc/consul.d
 
+# Start Cosnul
+systemctl daemon-reload
+systemctl enable consul.service
+systemctl start consul.service
