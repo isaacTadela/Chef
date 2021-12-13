@@ -29,9 +29,9 @@ After=network-online.target
 Documentation=https://www.consul.io/
 [Service]
 EnvironmentFile=-/etc/sysconfig/consul
-ExecStart=/usr/bin/consul agent -config-dir=/etc/consul.d/
-ExecReload=/usr/bin/consul reload
-ExecStop=/usr/bin/consul leave
+ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecReload=/usr/local/bin/consul reload
+ExecStop=/usr/local/bin/consul leave
 KillMode=process
 KillSignal=SIGTERM
 Restart=on-failure
