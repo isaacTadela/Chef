@@ -5,6 +5,10 @@ unzip consul_1.10.4_linux_amd64.zip
 rm consul_1.10.4_linux_amd64.zip
 sudo mv consul /usr/local/bin/
 
+mkdir /home/logs/
+export MY_PUBLIC_IP=$(curl ifconfig.me)
+echo "MY_PUBLIC_IP=$MY_PUBLIC_IP" | sudo tee -a /etc/environment
+
 # Consul agent configuration
 echo "{
   \"datacenter\": \"my_dc\",
@@ -16,9 +20,9 @@ echo "{
   \"leave_on_terminate\": false,
   \"enable_script_checks\":true,
   \"client_addr\": \"0.0.0.0\",
-  \"log_file\": \"/home/consul.log\",
-  \"serf_wan\": \"$MASTER_PRIVATE_IP\",
-  \"advertise_addr_wan\": \"$MASTER_PRIVATE_IP\"
+  \"log_file\": \"/home/logs/consul.log\",
+  \"serf_wan\": \"$MY_PUBLIC_IP\",
+  \"advertise_addr_wan\": \"$MY_PUBLIC_IP\"
 } " > /etc/consul.d/consul.json
 
 # Configure client agent as system service
