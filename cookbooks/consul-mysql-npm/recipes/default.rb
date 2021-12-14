@@ -31,7 +31,7 @@ end
 
 # Run consul-template
 execute "run consul-temaplte" do
-  command "consul-template -config /home/Chef/script/consul-template-configuration.hcl > /home/consul-template.log 2>&1 &"
+  command "consul-template -config /home/Chef/script/consul-template-configuration.hcl -consul-addr $MASTER_PUBLIC_IP:8500 > /home/consul-template.log 2>&1 &"
   not_if "ps -A | awk '{print $4}' | grep -x consul-template"
 end
 
