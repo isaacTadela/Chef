@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wget https://releases.hashicorp.com/consul/1.10.4/consul_1.10.4_linux_amd64.zip
+wget https://releases.hashicorp.com/consul/1.10.4/consul_1.10.4_linux_amd64.zip < "/dev/null"
 unzip consul_1.10.4_linux_amd64.zip
 rm consul_1.10.4_linux_amd64.zip
 sudo mv consul /usr/local/bin/
@@ -15,14 +15,12 @@ echo "{
   \"retry_join\": [ \"$MASTER_PUBLIC_IP\" ],
   \"data_dir\": \"/tmp/consul\",
   \"log_level\": \"DEBUG\",
-  \"node_name\": \"my_dc\",
   \"server\": false,
   \"leave_on_terminate\": false,
   \"enable_script_checks\":true,
   \"client_addr\": \"0.0.0.0\",
   \"log_file\": \"/home/logs/consul.log\",
-  \"serf_wan\": \"$MY_PUBLIC_IP\",
-  \"advertise_addr_wan\": \"$MY_PUBLIC_IP\"
+  \"advertise_addr\": \"$MY_PUBLIC_IP\"
 } " > /etc/consul.d/consul.json
 
 # Configure client agent as system service
