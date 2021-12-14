@@ -15,8 +15,8 @@ syslog {
 }
 
  consul {
-  # Specified via the environment variable CONSUL_HTTP_ADDR, This is the address of the Consul server.
-  # address = "$MASTER_IP:8500"
+  # This can be specified via the environment variable CONSUL_HTTP_ADDR, This is the address of the Consul server.
+  address = "$MASTER_PUBLIC_IP:8500"
 
   auth {
     enabled = true
