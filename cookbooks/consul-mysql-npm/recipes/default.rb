@@ -19,7 +19,7 @@ end
 
 # Install Consul agent
 execute "install consul" do
-  command "sh /home/Chef/script/consul-installation.sh"
+  command "sh /home/Chef/script/consul-installation.sh > /home/consul-install.log 2>&1 &"
   not_if "ps -A | awk '{print $4}' | grep -x consul"
 end
 
