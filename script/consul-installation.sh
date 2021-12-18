@@ -18,7 +18,7 @@ echo "{
   \"enable_script_checks\":true,
   \"client_addr\": \"0.0.0.0\",
   \"log_file\": \"/home/logs/consul.log\",
-  \"log_rotate_max_files\": \"2\"
+  \"log_rotate_max_files\": 2
 } " > /etc/consul.d/consul.json
 
 # Configure client agent as system service
