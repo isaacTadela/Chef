@@ -15,11 +15,12 @@ end
 # maybe i need to find another way ??
 execute "Node.js binary" do
   command "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && sudo apt-get install -y nodejs"
+  not_if "node -v | grep 14"
 end
 
-# Install Consul agent
+# Install Consul agent and Run as a system service
 execute "install consul" do
-  command "sh /home/Chef/script/consul-installation.sh > /home/consul-install.log 2>&1 &"
+  command "sh /home/Chef/script/consul-installation.sh > /home/logs/consul-install.log 2>&1 &"
   not_if "ps -A | awk '{print $4}' | grep -x consul"
 end
 
@@ -31,7 +32,7 @@ end
 
 # Run consul-template
 execute "run consul-temaplte" do
-  command "consul-template -config /home/Chef/script/consul-template-configuration.hcl -consul-addr $MASTER_PUBLIC_IP:8500 > /home/consul-template.log 2>&1 &"
+  command "consul-template -config /home/Chef/script/consul-template-configuration.hcl -consul-addr $MASTER_PUBLIC_IP:8500 > /home/logs/consul-template.log 2>&1 &"
   not_if "ps -A | awk '{print $4}' | grep -x consul-template"
 end
 
@@ -44,8 +45,8 @@ end
 bash 'run myApp-installation.sh, npm install and start' do
    cwd '/home/'
    code <<-EOH
-     sh /home/Chef/script/myApp-installation.sh > /home/myApp.log
-     cd /home/Unofficial-Chevrolet-Auto-shop && npm install >> /home/myApp.log
-     cd /home/Unofficial-Chevrolet-Auto-shop && node server.js & >> /home/myApp.log
+     sh /home/Chef/script/myApp-installation.sh > /home/logs/myApp.log
+     cd /home/Unofficial-Chevrolet-Auto-shop && npm install >> /home/logs/myApp.log
+     cd /home/Unofficial-Chevrolet-Auto-shop && node server.js & >> /home/logs/myApp.log
    EOH
 end

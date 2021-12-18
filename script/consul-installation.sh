@@ -1,13 +1,11 @@
 #!/bin/bash
 
-wget https://releases.hashicorp.com/consul/1.10.4/consul_1.10.4_linux_amd64.zip < "/dev/null"
-unzip consul_1.10.4_linux_amd64.zip
+wget https://releases.hashicorp.com/consul/1.10.4/consul_1.10.4_linux_amd64.zip
+unzip consul_1.10.4_linux_amd64.zip < "/dev/null"
 rm consul_1.10.4_linux_amd64.zip
 sudo mv consul /usr/local/bin/
 
 mkdir /home/logs/
-export MY_PUBLIC_IP=$(curl ifconfig.me)
-echo "MY_PUBLIC_IP=$MY_PUBLIC_IP" | sudo tee -a /etc/environment
 
 # Consul agent configuration
 echo "{
@@ -20,7 +18,7 @@ echo "{
   \"enable_script_checks\":true,
   \"client_addr\": \"0.0.0.0\",
   \"log_file\": \"/home/logs/consul.log\",
-  \"advertise_addr\": \"$MY_PUBLIC_IP\"
+  \"log_rotate_max_files\": \"2\"
 } " > /etc/consul.d/consul.json
 
 # Configure client agent as system service
