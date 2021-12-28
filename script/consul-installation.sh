@@ -21,6 +21,25 @@ echo "{
   \"log_rotate_max_files\": 2
 } " > /etc/consul.d/consul.json
 
+
+# Consul agent service check
+echo "{
+   \"service\": {
+   \"name\": \"$MASTER_PUBLIC_IP\",
+   \"tags\": [
+     \"my-website\"
+    ],
+   \"port\": 80,
+   \"check\": {
+     \"name\": \"$MASTER_PUBLIC_IP\",
+     \"http\": \"http://$MASTER_PUBLIC_IP:80/\",
+     \"method\": \"GET\",
+     \"interval\": \"10s\",
+     \"timeout\": \"5s\"
+   }
+ }
+} " > /etc/consul.d/web.json
+
 # Configure client agent as system service
 echo "[Unit]
 Description=HashiCorp Consul Client - A service mesh solution
@@ -40,9 +59,8 @@ LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/consul.service
 
-# The service to monitor
-sudo mkdir /etc/consul.d
-sudo cp /home/Chef/script/web.json /etc/consul.d
+# Start monitor the service
+sudo consul services register /etc/consul.d/web.json
 
 # Start Cosnul
 systemctl daemon-reload
