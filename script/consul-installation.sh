@@ -5,7 +5,12 @@ unzip consul_1.10.4_linux_amd64.zip < "/dev/null"
 rm consul_1.10.4_linux_amd64.zip
 sudo mv consul /usr/local/bin/
 
+
+export MY_PUBLIC_IP=$(curl ifconfig.me)
+echo "MY_PUBLIC_IP=$MY_PUBLIC_IP" | sudo tee -a /etc/environment
+
 mkdir /home/logs/
+mkdir /etc/consul.d/
 
 # Consul agent configuration
 echo "{
@@ -25,14 +30,14 @@ echo "{
 # Consul agent service check
 echo "{
    \"service\": {
-   \"name\": \"$MASTER_PUBLIC_IP\",
+   \"name\": \"$MY_PUBLIC_IP\",
    \"tags\": [
      \"my-website\"
     ],
    \"port\": 80,
    \"check\": {
-     \"name\": \"$MASTER_PUBLIC_IP\",
-     \"http\": \"http://$MASTER_PUBLIC_IP:80/\",
+     \"name\": \"$MY_PUBLIC_IP\",
+     \"http\": \"http://$MY_PUBLIC_IP:80/\",
      \"method\": \"GET\",
      \"interval\": \"10s\",
      \"timeout\": \"5s\"
