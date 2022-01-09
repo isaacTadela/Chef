@@ -53,7 +53,7 @@ Description=HashiCorp Consul Client - A service mesh solution
 Requires=network-online.target
 After=network-online.target
 Documentation=https://www.consul.io/
-ConditionFileNotEmpty=/etc/consul.d/consul.json
+ConditionFileNotEmpty=/etc/consul.d/consul.hcl
 [Service]
 EnvironmentFile=-/etc/sysconfig/consul
 ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
