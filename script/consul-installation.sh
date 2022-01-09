@@ -66,8 +66,6 @@ LimitNOFILE=65536
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/consul.service
 
-# Start monitor the service
-sudo consul services register /etc/consul.d/web.json
 
 # Start Cosnul
 systemctl daemon-reload
