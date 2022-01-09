@@ -9,23 +9,25 @@ sudo mv consul /usr/local/bin/
 export MY_PUBLIC_IP=$(curl ifconfig.me)
 echo "MY_PUBLIC_IP=$MY_PUBLIC_IP" | sudo tee -a /etc/environment
 
+export MY_PRIVATE_IP=$(hostname -I | awk '{print $1}')
+echo "MY_PRIVATE_IP=$MY_PRIVATE_IP" | sudo tee -a /etc/environment
+
+
 mkdir /home/logs/
 mkdir /etc/consul.d/
 
 # Consul agent configuration
-echo "{
-  \"datacenter\": \"my_dc\",
-  \"retry_join\": [ \"$MASTER_PUBLIC_IP\" ],
-  \"data_dir\": \"/tmp/consul\",
-  \"log_level\": \"DEBUG\",
-  \"server\": false,
-  \"leave_on_terminate\": false,
-  \"enable_script_checks\":true,
-  \"client_addr\": \"0.0.0.0\",
-  \"log_file\": \"/home/logs/consul.log\",
-  \"log_rotate_max_files\": 2
-} " > /etc/consul.d/consul.json
-
+echo "
+data_dir = \"/home/consul\"
+client_addr = \"0.0.0.0\"
+server = false
+bind_addr = \"$MY_PRIVATE_IP\" # private client ip
+advertise_addr = \"$MY_PUBLIC_IP\" # public client ip
+retry_join = [\"$MASTER_PUBLIC_IP\"] # public server ip
+datacenter = \"my_dc\"
+log_file = \"/home/logs/consul.log\"
+log_rotate_max_files = 1
+" > /etc/consul.d/consul.hcl
 
 # Consul agent service check
 echo "{
